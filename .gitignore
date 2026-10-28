@@ -1,0 +1,18 @@
+# build output
+earshot
+Earshot.app/
+.build/
+
+# macOS
+.DS_Store
+
+# Bluetooth captures and logs carry device addresses / serials — keep them local
+*.pklg
+*.pcap
+*.btsnoop
+captures/
+
+# local tooling / secrets
+.wrangler/
+.env
+.env.*
