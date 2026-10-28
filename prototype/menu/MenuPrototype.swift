@@ -62,8 +62,14 @@ func drawCentered(_ text: String, in rect: NSRect, size: CGFloat, color: NSColor
 }
 
 // 1. The headband arc doubles as the battery gauge; the number sits between the ear cups.
+// Drawn on a 30×18 grid, scaled to 80% (owner's pick) and centred vertically in the 18 pt slot.
 func headbandIcon(battery b: Int, ink: NSColor) -> NSImage {
-    NSImage(size: NSSize(width: 30, height: 18), flipped: false) { _ in
+    let scale: CGFloat = 0.8
+    return NSImage(size: NSSize(width: 30 * scale, height: 18), flipped: false) { _ in
+        let t = NSAffineTransform()
+        t.translateX(by: 0, yBy: 18 * (1 - scale) / 2)
+        t.scale(by: scale)
+        t.concat()
         let c = NSPoint(x: 15, y: 7)
         let track = NSBezierPath()
         track.appendArc(withCenter: c, radius: 11.5, startAngle: 180, endAngle: 0, clockwise: true)
